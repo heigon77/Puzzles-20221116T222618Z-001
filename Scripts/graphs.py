@@ -24,18 +24,18 @@ r2 = [x + barWidth for x in r1]
 r3 = [x + barWidth for x in r2]
  
 # Criando as barras
-plt.bar(r1, deepchess_computer, color='yellow', width=barWidth, label='DeepChess Computer Chess')
+plt.bar(r1, deepchess_computer, color='yellow', width=barWidth, label='Modelo CCRL')
 addlabels(r1,deepchess_computer,0)
-plt.bar(r2, deepchess_lichess, color='red', width=barWidth, label='DeepChess Lichess')
+plt.bar(r2, deepchess_lichess, color='red', width=barWidth, label='Modelo Lichess')
 addlabels(r2,deepchess_lichess,barWidth)
-plt.bar(r3, minimax, color='blue', width=barWidth, label='MiniMax')
+plt.bar(r3, minimax, color='blue', width=barWidth, label='Modelo clássico')
 addlabels(r3,minimax, 2*barWidth)
  
 # Adiciando legendas as barras
 plt.xlabel('Profundidades')
 plt.xticks([r + barWidth for r in range(len(deepchess_computer))], ['Profundidade 1', 'Profundidade 2', 'Profundidade 3'])
 plt.ylabel('Problemas solucionados')
-plt.title('Representação das soluções das 3 ferramentas computacionais em 3 profundidades')
+plt.title('Soluções dos 3 modelos em profundidades diferentes')
  
 # Criando a legenda e exibindo o gráfico
 plt.legend()

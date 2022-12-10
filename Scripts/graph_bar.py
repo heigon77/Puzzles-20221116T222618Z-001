@@ -4,231 +4,41 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from matplotlib.backends.backend_pdf import PdfPages
 
-df = pd.read_csv('Puzzles/DeepChessLichessDepth3_200.csv')
+# Minimax
+solved = [47.13,34.27,46.72,30.66,21.72,45.27,23.85,11.80,64.16]
+solved_1200 = [89.62,74.00,84.89,66.35,59.41,84.03,45.37,20.00,93.88]
+solved_1800 = [77.48,62.14,65.28,43.55,37.86,63.78,30.28,24.00,86.08]
+solved_2200 = [33.98,22.73,44.72,31.06,17.89,35.65,25.00,11.30,56.36]
+solved_2500 = [19.80,14.02,17.46,14.57,7.19,16.50,11.01,6.14,32.00]
+solved_high = [9.90,3.60,9.26,9.42,1.99,7.77,8.62,0.82,12.00]
 
-solved = [0] * 12
-solved_1200 = [0] * 12
-solved_1800 = [0] * 12
-solved_2200 = [0] * 12
-solved_2500 = [0] * 12
-solved_high = [0] * 12
+# Lichess
+# solved = [27.39,19.02,27.97,15.10,10.21,32.43,19.26,12.52,42.47]
+# solved_1200 = [49.06,43.00,55.40,44.23,37.62,65.97,45.37,34.00,61.22]
+# solved_1800 = [46.85,27.18,29.86,20.16,13.59,47.24,28.44,22.00,62.03]
+# solved_2200 = [17.48,18.18,25.20,9.09,4.07,16.52,11.29,7.83,36.36]
+# solved_2500 = [13.86,7.48,17.46,5.30,2.88,11.65,5.50,1.75,14.00]
+# solved_high = [6.93,1.80,5.56,5.07,1.32,5.83,7.76,1.64,10.00]
 
-for idx, row in df.iterrows():
-    if row['Solved'] is True:
-        if 'opening' in row['Themes']  and 'short' in row['Themes']:
-            solved[0] += 1
-            aux = 0
-
-            if int(row['Rating']) <= 1200:
-                solved_1200[aux] += 1
-            elif int(row['Rating']) <= 1800:
-                solved_1800[aux] += 1
-            elif int(row['Rating']) <= 2200:
-                solved_2200[aux] += 1
-            elif int(row['Rating']) <= 2500:
-                solved_2500[aux] += 1
-            else:
-                solved_high[aux] += 1
-
-        if 'opening' in row['Themes']  and 'long' in row['Themes']:
-            solved[1] += 1
-            aux = 1
-
-            if int(row['Rating']) <= 1200:
-                solved_1200[aux] += 1
-            elif int(row['Rating']) <= 1800:
-                solved_1800[aux] += 1
-            elif int(row['Rating']) <= 2200:
-                solved_2200[aux] += 1
-            elif int(row['Rating']) <= 2500:
-                solved_2500[aux] += 1
-            else:
-                solved_high[aux] += 1
-
-        if 'middlegame' in row['Themes']  and 'short' in row['Themes']:
-            solved[2] += 1
-            aux = 2
-
-            if int(row['Rating']) <= 1200:
-                solved_1200[aux] += 1
-            elif int(row['Rating']) <= 1800:
-                solved_1800[aux] += 1
-            elif int(row['Rating']) <= 2200:
-                solved_2200[aux] += 1
-            elif int(row['Rating']) <= 2500:
-                solved_2500[aux] += 1
-            else:
-                solved_high[aux] += 1
-
-        if 'middlegame' in row['Themes']  and 'long' in row['Themes']:
-            solved[3] += 1
-            aux = 3
-
-            if int(row['Rating']) <= 1200:
-                solved_1200[aux] += 1
-            elif int(row['Rating']) <= 1800:
-                solved_1800[aux] += 1
-            elif int(row['Rating']) <= 2200:
-                solved_2200[aux] += 1
-            elif int(row['Rating']) <= 2500:
-                solved_2500[aux] += 1
-            else:
-                solved_high[aux] += 1
-
-        if 'middlegame' in row['Themes']  and 'veryLong' in row['Themes']:
-            solved[4] += 1
-            aux = 4
-
-            if int(row['Rating']) <= 1200:
-                solved_1200[aux] += 1
-            elif int(row['Rating']) <= 1800:
-                solved_1800[aux] += 1
-            elif int(row['Rating']) <= 2200:
-                solved_2200[aux] += 1
-            elif int(row['Rating']) <= 2500:
-                solved_2500[aux] += 1
-            else:
-                solved_high[aux] += 1
+# Computer
+# solved = [20.69,13.37,25.63,15.87,9.56,33.45,17.31,11.07,32.53]
+# solved_1200 = [39.62,25.00,53.96,34.62,33.66,57.64,40.74,32.00,46.94]
+# solved_1800 = [34.23,20.39,29.86,25.81,9.71,40.94,21.10,19.00,48.10]
+# solved_2200 = [13.59,12.73,17.07,16.67,4.88,28.70,12.90,5.22,21.82]
+# solved_2500 = [6.93,3.74,14.29,5.96,5.04,14.56,11.01,2.63,14.00]
+# solved_high = [6.93,6.31,6.48,2.90,1.32,14.56,2.59,0.82,10.00]
 
 
-        if 'endgame' in row['Themes']  and 'short' in row['Themes']:
-            solved[5] += 1
-            aux = 5
-
-            if int(row['Rating']) <= 1200:
-                solved_1200[aux] += 1
-            elif int(row['Rating']) <= 1800:
-                solved_1800[aux] += 1
-            elif int(row['Rating']) <= 2200:
-                solved_2200[aux] += 1
-            elif int(row['Rating']) <= 2500:
-                solved_2500[aux] += 1
-            else:
-                solved_high[aux] += 1
-
-        if 'endgame' in row['Themes']  and 'long' in row['Themes']:
-            solved[6] += 1
-            aux = 6
-
-            if int(row['Rating']) <= 1200:
-                solved_1200[aux] += 1
-            elif int(row['Rating']) <= 1800:
-                solved_1800[aux] += 1
-            elif int(row['Rating']) <= 2200:
-                solved_2200[aux] += 1
-            elif int(row['Rating']) <= 2500:
-                solved_2500[aux] += 1
-            else:
-                solved_high[aux] += 1
-
-        if 'endgame' in row['Themes']  and 'veryLong' in row['Themes']:
-            solved[7] += 1
-            aux = 7
-
-            if int(row['Rating']) <= 1200:
-                solved_1200[aux] += 1
-            elif int(row['Rating']) <= 1800:
-                solved_1800[aux] += 1
-            elif int(row['Rating']) <= 2200:
-                solved_2200[aux] += 1
-            elif int(row['Rating']) <= 2500:
-                solved_2500[aux] += 1
-            else:
-                solved_high[aux] += 1
-        
-        if 'mate' in row['Themes']:
-            solved[8] += 1
-            aux = 8
-
-            if int(row['Rating']) <= 1200:
-                solved_1200[aux] += 1
-            elif int(row['Rating']) <= 1800:
-                solved_1800[aux] += 1
-            elif int(row['Rating']) <= 2200:
-                solved_2200[aux] += 1
-            elif int(row['Rating']) <= 2500:
-                solved_2500[aux] += 1
-            else:
-                solved_high[aux] += 1
-
-        if 'sacrifice' in row['Themes']:
-            solved[9] += 1
-            aux = 9
-
-            if int(row['Rating']) <= 1200:
-                solved_1200[aux] += 1
-            elif int(row['Rating']) <= 1800:
-                solved_1800[aux] += 1
-            elif int(row['Rating']) <= 2200:
-                solved_2200[aux] += 1
-            elif int(row['Rating']) <= 2500:
-                solved_2500[aux] += 1
-            else:
-                solved_high[aux] += 1
-
-        if 'discoveredAttack' in row['Themes']:
-            solved[10] += 1
-            aux = 10
-
-            if int(row['Rating']) <= 1200:
-                solved_1200[aux] += 1
-            elif int(row['Rating']) <= 1800:
-                solved_1800[aux] += 1
-            elif int(row['Rating']) <= 2200:
-                solved_2200[aux] += 1
-            elif int(row['Rating']) <= 2500:
-                solved_2500[aux] += 1
-            else:
-                solved_high[aux] += 1
-
-        if 'fork' in row['Themes']:
-            solved[11] += 1
-            aux = 11
-
-            if int(row['Rating']) <= 1200:
-                solved_1200[aux] += 1
-            elif int(row['Rating']) <= 1800:
-                solved_1800[aux] += 1
-            elif int(row['Rating']) <= 2200:
-                solved_2200[aux] += 1
-            elif int(row['Rating']) <= 2500:
-                solved_2500[aux] += 1
-            else:
-                solved_high[aux] += 1
-
-
-
-
-# Um gráfico com a renda média por faixa etária será nosso Hello World, vamos definir alguns valores fictícios
-temas = ["Ab.cur",
-        "Ab.med",
-        "Mj.cur",
-        "Mj.med",
-        "Mj.lon",
-        "Fj.cur",
-        "Fj.med",
-        "Fj.lon",
-
-        "Mate",
-        "Sac",
-        "At.des",
-        "At.dup"
+temas = ["A.cur",
+        "A.med",
+        "M.cur",
+        "M.med",
+        "M.lon",
+        "F.cur",
+        "F.med",
+        "F.lon",
+        "Mate"
         ]
-
-# legenda = ["os: opening short",
-#         "ol: opening long",
-#         "ms: middlegame short",
-#         "ml: middlegame long",
-#         "mv: middlegame veryLong",
-#         "es: endgame short",
-#         "el: endgame long",
-#         "ev: engame veryLong",
-
-#         "mate: checkmate",
-#         "sacr: sacrifice",
-#         "disc: discoveredAtack",
-#         "fork: fork"
-#         ]
 
 """
     Chamamos o método bar que criará o gráfico de barra 
@@ -240,85 +50,53 @@ temas = ["Ab.cur",
 
 def addlabels(x,y,axs):
     for i in range(len(x)):
-        axs.text(i, y[i], y[i], ha = 'center', fontsize=20)
-
-# fig, axs = plt.subplots(3, 2)
-
-# axs[0, 0].bar(temas, solved, color='red')
-# axs[0, 0].set_title('Total', fontsize=24)
-# axs[0, 0].tick_params(labelsize=16)
-# addlabels(temas, solved, axs[0, 0])
-
-# axs[0, 1].bar(temas, solved_1200, color='cyan')
-# axs[0, 1].set_title('1200', fontsize=20)
-# axs[0, 1].tick_params(labelsize=16)
-# addlabels(temas, solved_1200, axs[0, 1])
-
-# axs[1, 0].bar(temas, solved_1800, color='green')
-# axs[1, 0].set_title('1800', fontsize=20)
-# axs[1, 0].tick_params(labelsize=16)
-# addlabels(temas, solved_1800, axs[1, 0])
-
-# axs[1, 1].bar(temas, solved_2200, color='magenta')
-# axs[1, 1].set_title('2200', fontsize=20)
-# axs[1, 1].tick_params(labelsize=16)
-# addlabels(temas, solved_2200, axs[1, 1])
-
-# axs[2, 0].bar(temas, solved_2500, color='blue')
-# axs[2, 0].set_title('2500', fontsize=20)
-# axs[2, 0].tick_params(labelsize=16)
-# addlabels(temas, solved_2500, axs[2, 0])
-
-# axs[2, 1].bar(temas, solved_high, color='yellow')
-# axs[2, 1].set_title('2500+', fontsize=20)
-# axs[2, 1].tick_params(labelsize=16)
-# addlabels(temas, solved_high, axs[2, 1])
+        axs.text(i, y[i], str(y[i])+' %', ha = 'center', fontsize=20)
 
 
-# fig.legend(legenda)
-# fig.set_size_inches(30.0, 30.0)
+sizex = 14
+sizey = 8
 
 fig1 = plt.figure()
-fig1.set_size_inches(18.5, 10.5)
+fig1.set_size_inches(sizex, sizey)
 plt.bar(temas, solved, color='red')
-plt.title('Total', fontsize=32)
+plt.title('Todos os problemas', fontsize=32)
 plt.tick_params(labelsize=22)
 addlabels(temas, solved, plt)
 # plt.savefig("Imagens/MinimaxBarsTotal.pdf")
 
 fig2 = plt.figure()
-fig2.set_size_inches(18.5, 10.5)
+fig2.set_size_inches(sizex, sizey)
 plt.bar(temas, solved_1200, color='cyan')
-plt.title('1200', fontsize=32)
+plt.title('0 a 1200', fontsize=32)
 plt.tick_params(labelsize=22)
 addlabels(temas, solved_1200, plt)
 # plt.savefig("Imagens/MinimaxBars1200.pdf")
 
 fig3 = plt.figure()
-fig3.set_size_inches(18.5, 10.5)
+fig3.set_size_inches(sizex, sizey)
 plt.bar(temas, solved_1800, color='green')
-plt.title('1800', fontsize=32)
+plt.title('1200 a 1800', fontsize=32)
 plt.tick_params(labelsize=22)
 addlabels(temas, solved_1800, plt)
 
 fig4 = plt.figure()
-fig4.set_size_inches(18.5, 10.5)
+fig4.set_size_inches(sizex, sizey)
 plt.bar(temas, solved_2200, color='magenta')
-plt.title('2200', fontsize=32)
+plt.title('1800 a 2200', fontsize=32)
 plt.tick_params(labelsize=22)
 addlabels(temas, solved_2200, plt)
 
 fig5 = plt.figure()
-fig5.set_size_inches(18.5, 10.5)
+fig5.set_size_inches(sizex, sizey)
 plt.bar(temas, solved_2500, color='blue')
-plt.title('2500', fontsize=32)
+plt.title('2200 a 2500', fontsize=32)
 plt.tick_params(labelsize=22)
 addlabels(temas, solved_2500, plt)
 
 fig6 = plt.figure()
-fig6.set_size_inches(18.5, 10.5)
+fig6.set_size_inches(sizex, sizey)
 plt.bar(temas, solved_high, color='yellow')
-plt.title('2500+', fontsize=32)
+plt.title('Acima de 2500', fontsize=32)
 plt.tick_params(labelsize=22)
 addlabels(temas, solved_high, plt)
 
@@ -334,5 +112,7 @@ def save_multi_image(filename):
         fig.savefig(pp, format='pdf')
     pp.close()
 
-filename = "LichessBars.pdf"
+# filename = "Imagens\ComputerBars.pdf"
+# filename = "Imagens\LichessBars.pdf"
+filename = "Imagens\MinimaxClassicalBars.pdf"
 save_multi_image(filename)
